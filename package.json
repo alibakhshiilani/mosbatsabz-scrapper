@@ -4,13 +4,15 @@
   "description": "Mosbat Sabz Scrapper",
   "main": "index.js",
   "scripts": {
+    "get-categories": "node index.js",
+    "get-products-and-category": "node getProductsAndCategory.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Ali Bakhshi Ilani",
-  "license": "GPL-2.0",
+  "license": "GPL-3.0",
   "dependencies": {
     "cheerio": "^1.0.0-rc.12",
-    "request": "^2.88.2",
-    "request-async": "^0.1.0"
+    "request": "^2.88.0",
+    "request-promise": "^4.2.5"
   }
 }
