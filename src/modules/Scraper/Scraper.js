@@ -10,9 +10,9 @@ class Scraper {
     this.#timeout = timeout;
   }
 
-  async go(url) {
+  go(url) {
     this.#url = url;
-    this.#response = await this.#getUrlContent();
+    this.#response = this.#getUrlContent();
     return this;
   }
 
@@ -20,12 +20,8 @@ class Scraper {
     return this.#response;
   }
 
-  async #getUrlContent() {
-    return await request.get(this.#url);
-  }
-
-  #sleep(miliseconds) {
-    return new Promise((resolve) => setTimeout(resolve, this.miliseconds));
+  #getUrlContent() {
+    return request.get(this.#url);
   }
 }
 

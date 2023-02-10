@@ -2,17 +2,25 @@
   "name": "mosbatsabz-scrapper",
   "version": "0.0.1",
   "description": "Mosbat Sabz Scrapper",
-  "main": "index.js",
+  "main": "bin/index.js",
+  "bin": {
+    "sabz-scrapper": "./bin/index.js"
+  },
   "scripts": {
-    "get-categories": "node index.js",
-    "get-products-and-category": "node getProductsAndCategory.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Ali Bakhshi Ilani",
   "license": "GPL-3.0",
   "dependencies": {
+    "boxen": "^4.2.0",
+    "chalk": "^4.1.1",
     "cheerio": "^1.0.0-rc.12",
+    "figlet": "^1.5.2",
+    "pg": "^8.9.0",
+    "pg-hstore": "^2.3.4",
     "request": "^2.88.0",
-    "request-promise": "^4.2.5"
+    "request-promise": "^4.2.5",
+    "sequelize": "^6.28.0",
+    "yargs": "^16.1.1"
   }
 }
