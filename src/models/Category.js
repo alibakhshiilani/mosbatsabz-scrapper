@@ -1,12 +1,20 @@
 const { Sequelize, DataTypes } = require("sequelize");
-const { Database } = require("../modules/Database/Database");
-const sequelize = new Database().getConnection();
+
+const sequelize = new Sequelize("mosbatsabz", "myuser2", "1141376#$", {
+  host: "localhost",
+  dialect:
+    "postgres" /* one of 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | 'db2' | 'snowflake' | 'oracle' */,
+});
 
 const Category = sequelize.define(
   "Category",
   {
     // Model attributes are defined here
     title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    url: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -22,5 +30,14 @@ const Category = sequelize.define(
     schema: "categories",
   }
 );
+
+Category.createIfNotExist = function (values) {
+  return Category.findOne({ where: values }).then(function (result) {
+    if (!result) {
+      return Category.create(values);
+    }
+    return Promise.resolve(result);
+  });
+};
 
 exports.Category = Category;

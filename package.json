@@ -12,14 +12,13 @@
   "author": "Ali Bakhshi Ilani",
   "license": "GPL-3.0",
   "dependencies": {
+    "axios": "^1.3.3",
     "boxen": "^4.2.0",
     "chalk": "^4.1.1",
     "cheerio": "^1.0.0-rc.12",
     "figlet": "^1.5.2",
     "pg": "^8.9.0",
     "pg-hstore": "^2.3.4",
-    "request": "^2.88.0",
-    "request-promise": "^4.2.5",
     "sequelize": "^6.28.0",
     "yargs": "^16.1.1"
   }

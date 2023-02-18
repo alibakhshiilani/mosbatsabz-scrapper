@@ -3,7 +3,7 @@ const chalk = require("chalk");
 const boxen = require("boxen");
 const yargs = require("yargs");
 const figlet = require("figlet");
-const { getCategories } = require("../src/getCategories");
+const { startScraping } = require("../src/startScraping");
 
 const usage = chalk.keyword("violet")(
   // "\nUsage: sabz-scrapper \n" +
@@ -34,6 +34,12 @@ yargs
     type: "string",
     demandOption: false,
   })
+  .option("wd", {
+    alias: "with-details",
+    describe: "Scrape From Single Pages (With Detail)",
+    type: "string",
+    demandOption: false,
+  })
   .help(true).argv;
 
 // console.log(yargs.argv);
@@ -43,9 +49,11 @@ if (
   argv.sc == null &&
   argv.sp == null &&
   argv.spi == null &&
+  argv.wd == null &&
   argv["scrape-categories"] == null &&
   argv["scrape-products"] == null &&
-  argv["scrape-products-by-id"] == null
+  argv["scrape-products-by-id"] == null &&
+  argv["with-details"] == null
 ) {
   console.log(
     chalk.yellow(figlet.textSync("Sabz Scraper", { horizontalLayout: "full" }))
@@ -57,24 +65,25 @@ if (
   argv.sc == null &&
   argv.sp == null &&
   argv.spi == null &&
+  argv.wd == null &&
   argv["scrape-categories"] == null &&
   argv["scrape-products"] == null &&
-  argv["scrape-products-by-id"] == null
+  argv["scrape-products-by-id"] == null &&
+  argv["with-details"] == null
 ) {
   yargs.showHelp();
   return;
 }
 
-const scrapeCategories = argv.sc || argv["scrape-categories"];
+// const scrapeCategories = argv.sc || argv["scrape-categories"];
 
 const scrapeProducts = argv.sp || argv["scrape-products"];
 
-const scrapeProductsById = argv.spi || argv["scrape-products-by-id"];
+const scrapeWithDetails = argv.wd || argv["with-details"];
 
-console.log(scrapeCategories, scrapeProducts, scrapeProductsById);
+// const scrapeProductsById = argv.spi || argv["scrape-products-by-id"];
 
-if(scrapeCategories){
+// console.log(scrapeCategories, scrapeProducts, scrapeProductsById);
 
-  getCategories();
-  return;
-}
+startScraping(scrapeProducts, scrapeWithDetails);
+// return 1;
