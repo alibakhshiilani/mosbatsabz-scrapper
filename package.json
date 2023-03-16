@@ -12,6 +12,7 @@
   "author": "Ali Bakhshi Ilani",
   "license": "GPL-3.0",
   "dependencies": {
+    "agentkeepalive": "^4.2.1",
     "axios": "^1.3.3",
     "boxen": "^4.2.0",
     "chalk": "^4.1.1",
