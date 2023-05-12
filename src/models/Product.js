@@ -51,7 +51,11 @@ const Product = sequelize.define(
 );
 
 Product.createIfNotExist = function (values) {
-  return Product.findOne({ where: values }).then(function (result) {
+  return Product.findOne({
+    where: {
+      title: values.title,
+    },
+  }).then(function (result) {
     if (!result) {
       return Product.create(values);
     }

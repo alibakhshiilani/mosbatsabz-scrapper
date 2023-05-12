@@ -32,7 +32,11 @@ const Category = sequelize.define(
 );
 
 Category.createIfNotExist = function (values) {
-  return Category.findOne({ where: values }).then(function (result) {
+  return Category.findOne({
+    where: {
+      title: values.title,
+    },
+  }).then(function (result) {
     if (!result) {
       return Category.create(values);
     }

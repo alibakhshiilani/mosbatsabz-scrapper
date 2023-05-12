@@ -1,4 +1,5 @@
 const Agent = require("agentkeepalive");
+const { default: axios } = require("axios");
 const HttpsAgent = require("agentkeepalive").HttpsAgent;
 
 const keepAliveAgent = new Agent({
@@ -23,4 +24,4 @@ const httpService = axios.create({
   httpsAgent: httpsKeepAliveAgent,
 });
 
-export default httpService;
+exports.httpService = httpService;

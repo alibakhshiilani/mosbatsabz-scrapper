@@ -1,21 +1,22 @@
 const cheerio = require("cheerio");
+const { httpService } = require("./app/httpService");
 const { logger } = require("./app/logger");
 const { Category } = require("./models/Category");
 const { Product } = require("./models/Product");
 
 async function startScraping(scrapeProducts, scrapeWithDetails) {
   logger("log", "Start Scraping");
+  // let $ = null;
+  // const defaultDelay = 10000;
 
-  const defaultDelay = 10000;
-
-  function delay(time) {
-    return new Promise((resolve) => setTimeout(resolve, time));
-  }
+  // function delay(time) {
+  //   return new Promise((resolve) => setTimeout(resolve, time));
+  // }
 
   async function getProductsByCatUrl(catId, url, pageNumber = 1) {
     // console.log("url2", url);
     let totalPages = 1;
-    await delay(defaultDelay);
+    // await delay(defaultDelay);
     await httpService
       .get(url + "page/" + pageNumber)
       .then((response) => {
@@ -36,7 +37,7 @@ async function startScraping(scrapeProducts, scrapeWithDetails) {
               url: $(product).find(".wd-entities-title > a").attr("href"),
             });
           } else {
-            await delay(defaultDelay);
+            // await delay(defaultDelay);
             await httpService
               .get($(product).find(".product-element-top > a").attr("href"))
               .then((response) => {
@@ -71,7 +72,7 @@ async function startScraping(scrapeProducts, scrapeWithDetails) {
       });
 
     if (pageNumber < totalPages) {
-      await delay(defaultDelay);
+      // await delay(defaultDelay);
       getProductsByCatUrl(catId, url, pageNumber + 1);
     }
   }
@@ -86,7 +87,7 @@ async function startScraping(scrapeProducts, scrapeWithDetails) {
           parent_id: parentId,
           url: $(subItem).find(" > a").attr("href"),
         })
-          .then((result) => {
+          .then(function (result) {
             getSubMenuItems(subItem, result.id);
           })
           .catch((error) => {
@@ -107,7 +108,7 @@ async function startScraping(scrapeProducts, scrapeWithDetails) {
     .then((response) => {
       console.log("status", response.status);
       // return;
-      const $ = cheerio.load(response.data);
+      $ = cheerio.load(response.data);
 
       const menu = $(".whb-header-bottom .wd-header-nav > ul.menu");
 
@@ -123,7 +124,7 @@ async function startScraping(scrapeProducts, scrapeWithDetails) {
               parent_id: null,
               url: $(rootMenuItem).find(" > a").attr("href"),
             })
-              .then((result) => {
+              .then(function (result) {
                 // console.log("result", result);
                 getSubMenuItems(rootMenuItem, result.id);
               })
